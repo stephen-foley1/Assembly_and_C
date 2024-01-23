@@ -1,0 +1,45 @@
+00001000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 23/01/2024 10:10:27
+
+00000000                             1  *-----------------------------------------------------------
+00000000                             2  * Title      :PART 3
+00000000                             3  * Written by :
+00000000                             4  * Date       :
+00000000                             5  * Description:
+00000000                             6  *-----------------------------------------------------------
+00001000                             7      ORG    $1000
+00001000                             8  START:                  ; first instruction of program
+00001000                             9  
+00001000                            10  * Put program code here
+00001000  7004                      11      MOVE.L #%100, D0 ; Move Long binary value 100 to D0
+00001002  223C 00000100             12      MOVE.L #$100, D1 ; Move Long hex value 100 to D1
+00001008  7464                      13      MOVE.L #100,  D2 ; Move Long decimal value 100 to D2
+0000100A                            14      
+0000100A  21C0 3000                 15      MOVE.L D0,  $3000 ; Move Data reg to Mem location 3000
+0000100E  21C1 3010                 16      MOVE.L D1,  $3010
+00001012  21C2 3020                 17      MOVE.L D2,  $3020
+00001016                            18       
+00001016  31FC 0064 3020            19      MOVE.W #100,  $3020 ; Move word value 100 to location $3020
+0000101C  31FC 0100 3010            20      MOVE.W #$100, $3010
+00001022  31FC 0004 3000            21      MOVE.W #%100, $3000
+00001028                            22  
+00001028  11FC 0064 3020            23      MOVE.B #100,    $3020 ;move byte value 100 to $3020
+0000102E  11FC 0064 3010            24      MOVE.B #$64,    $3010
+00001034  11FC 008F 3000            25      MOVE.B #%10001111,  $3000 
+0000103A                            26      
+0000103A                            27  
+0000103A  FFFF FFFF                 28      SIMHALT             ; halt simulator
+0000103E                            29  
+0000103E                            30  * Put variables and constants here
+0000103E                            31  
+0000103E                            32      END    START        ; last line of source
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+START               1000

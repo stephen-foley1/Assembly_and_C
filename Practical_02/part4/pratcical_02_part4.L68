@@ -1,6 +1,6 @@
 00001000 Starting Address
 Assembler used: EASy68K Editor/Assembler v5.16.01
-Created On: 23/01/2024 10:33:29
+Created On: 23/01/2024 10:47:32
 
 00000000                             1  *-----------------------------------------------------------
 00000000                             2  * Title      :PART 4
@@ -12,38 +12,39 @@ Created On: 23/01/2024 10:33:29
 00001000                             8  START:                  ; first instruction of program
 00001000                             9  
 00001000                            10  * Put program code her
-00001000  203C 000000FE             11      MOVE.L #254,  D0
+00001000  203C 000000FE             11      MOVE.L #254,  D0 ; Move Long value 254 to D0
 00001006  223C 000000FA             12      MOVE.L #$FA,  D1
 0000100C  7406                      13      MOVE.L #%110, D2
 0000100E                            14      
 0000100E                            15      
-0000100E  21C0 3000                 16      MOVE.L D0, $3000
+0000100E  21C0 3000                 16      MOVE.L D0, $3000 ; Move long data  reg to mem location 3000
 00001012  21C1 3010                 17      MOVE.L D1, $3010
 00001016  21C2 3020                 18      MOVE.L D2, $3020
 0000101A                            19      
-0000101A  31FC 00FE 3020            20      MOVE.W #254 , $3020
+0000101A  31FC 00FE 3020            20      MOVE.W #254 , $3020 ;Move word value 254 to mem location 3020
 00001020  31FC 00FA 3010            21      MOVE.W #$FA , $3010
 00001026  31FC 0004 3000            22      MOVE.W #%100, $3000
 0000102C                            23      
-0000102C  31C0 3000                 24      MOVE.W D0, $3000
+0000102C  31C0 3000                 24      MOVE.W D0, $3000 ; Move word data  reg to mem location 3000
 00001030  31C1 3010                 25      MOVE.W D1, $3010
 00001034  31C2 3020                 26      MOVE.W D2, $3020
 00001038                            27      
-00001038  11FC 00FE 3020            28      MOVE.B #254, $3020
-0000103E  11FC 00FA 3010            29      MOVE.B #$FA, $3010
-00001044  11FC 0006 3000            30      MOVE.B #%110, $3000
-0000104A                            31      
-0000104A  11C0 3000                 32      MOVE.B D0, $3000
-0000104E  11C1 3010                 33      MOVE.B D1, $3010
-00001052  11C2 3020                 34      MOVE.B D2, $3020
-00001056                            35    
-00001056                            36      
-00001056                            37  
-00001056  FFFF FFFF                 38      SIMHALT             ; halt simulator
-0000105A                            39  
-0000105A                            40  * Put variables and constants here
-0000105A                            41  
-0000105A                            42      END    START        ; last line of source
+00001038                            28      
+00001038  11FC 00FE 3020            29      MOVE.B #254, $3020 ;move byte value 254 to mem loaction 3020  
+0000103E  11FC 00FA 3010            30      MOVE.B #$FA, $3010
+00001044  11FC 0006 3000            31      MOVE.B #%110, $3000
+0000104A                            32      
+0000104A  11C0 3000                 33      MOVE.B D0, $3000 Move byte data  reg to mem location 3000
+0000104E  11C1 3010                 34      MOVE.B D1, $3010
+00001052  11C2 3020                 35      MOVE.B D2, $3020
+00001056                            36    
+00001056                            37      
+00001056                            38  
+00001056  FFFF FFFF                 39      SIMHALT             ; halt simulator
+0000105A                            40  
+0000105A                            41  * Put variables and constants here
+0000105A                            42  
+0000105A                            43      END    START        ; last line of source
 
 No errors detected
 No warnings generated

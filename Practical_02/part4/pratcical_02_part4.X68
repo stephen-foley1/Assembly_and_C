@@ -22,15 +22,15 @@ START:                  ; first instruction of program
     MOVE.W #%100, $3000
     
     MOVE.W D0, $3000 ; Move word data  reg to mem location 3000
-
     MOVE.W D1, $3010
     MOVE.W D2, $3020
     
-    MOVE.B #254, $3020
+    
+    MOVE.B #254, $3020 ;move byte value 254 to mem loaction 3020  
     MOVE.B #$FA, $3010
     MOVE.B #%110, $3000
     
-    MOVE.B D0, $3000
+    MOVE.B D0, $3000 Move byte data  reg to mem location 3000
     MOVE.B D1, $3010
     MOVE.B D2, $3020
   
@@ -41,6 +41,7 @@ START:                  ; first instruction of program
 * Put variables and constants here
 
     END    START        ; last line of source
+
 
 
 

@@ -1,0 +1,32 @@
+00001000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 30/01/2024 09:45:23
+
+00000000                             1  *-----------------------------------------------------------
+00000000                             2  * Title      :Part 2
+00000000                             3  * Written by :Stephen Foley
+00000000                             4  * Date       :30/01/2024
+00000000                             5  * Description:
+00000000                             6  *-----------------------------------------------------------
+00001000                             7      ORG    $1000
+00001000                             8  START:                  ; first instruction of program
+00001000                             9  
+00001000                            10  * Put program code here
+00001000  45F8 4000                 11      LEA $4000, A2       ; Move mem location 4000 to a2
+00001004  14BC 0064                 12      MOVE.B #100, (A2)   ; Move byte value 100 to a2
+00001008  0412 000A                 13      SUB.B #10,   (A2)   ; Subtract value 10 from address register a
+0000100C                            14  
+0000100C  FFFF FFFF                 15      SIMHALT             ; halt simulator
+00001010                            16  
+00001010                            17  * Put variables and constants here
+00001010                            18  
+00001010                            19      END    START        ; last line of source
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+START               1000

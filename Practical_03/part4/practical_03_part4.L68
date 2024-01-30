@@ -1,0 +1,56 @@
+00001000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 30/01/2024 10:08:11
+
+00000000                             1  *-----------------------------------------------------------
+00000000                             2  * Title      :Part 4
+00000000                             3  * Written by :Stephen Foley
+00000000                             4  * Date       :30/01/2024
+00000000                             5  * Description:
+00000000                             6  *-----------------------------------------------------------
+00001000                             7      ORG    $1000
+00001000                             8  START:                  ; first instruction of program
+00001000                             9  
+00001000                            10  * Put program code here
+00001000                            11  
+00001000  47F9 0000104A             12      LEA HEALTH, A3          ; Move label Health into address register 3
+00001006  49F9 0000104B             13      LEA BOSSHEALTH, A4      ; Move label BossHealth into address register 4
+0000100C  4BF9 0000104C             14      LEA PLAYERDAMAGE,A5     ; Move label PlayerDamage into address register 5
+00001012                            15  
+00001012  47F8 3000                 16      LEA $3000, A3           ; Move memory location 3000 to Address Register 3
+00001016  49F8 4000                 17      LEA $4000, A4           ; Move memory location 4000 to Address Register 4
+0000101A  4BF8 5000                 18      LEA $5000, A5           ; Move memory location 5000 to Address Register 5
+0000101E                            19      
+0000101E                            20      
+0000101E  16BC 0064                 21      MOVE.B #100, (A3)       ; Move byte value 100 into address register 3
+00001022  28BC 00000064             22      MOVE.L #100, (A4)       ; Move long value 100 into address register 4
+00001028  3ABC 0064                 23      MOVE.W #100, (A5)       ; Move word value 100 into address register 5
+0000102C                            24      
+0000102C  0413 000F                 25      SUB.B #15, (A3)         ; Subtract byte value 10 from address register 3
+00001030  0494 00000014             26      SUB.L #20, (A4)         ; Subtract long value 20 from address register 4
+00001036  5B55                      27      SUB.W #5,  (A5)         ; Subtract word value 5 from address register  5
+00001038                            28      
+00001038  36BC 000A                 29      MOVE.W #10, (A3)        ; Move word value 10 to address register 3
+0000103C  18BC 000F                 30      MOVE.B #15, (A4)        ; Move byte value 15 to address register 4
+00001040  2ABC 00000014             31      MOVE.L #20, (A5)        ; Move long vlaue 20 to address register 5
+00001046                            32  
+00001046  FFFF FFFF                 33      SIMHALT             ; halt simulator
+0000104A= 64                        34  HEALTH dc.b $64
+0000104B= 99                        35  BOSSHEALTH dc.b $99
+0000104C= 10                        36  PLAYERDAMAGE dc.b $10
+0000104D                            37  
+0000104D                            38  * Put variables and constants here
+0000104D                            39  
+0000104D                            40      END    START        ; last line of source
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+BOSSHEALTH          104B
+HEALTH              104A
+PLAYERDAMAGE        104C
+START               1000

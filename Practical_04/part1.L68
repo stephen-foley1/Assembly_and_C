@@ -1,0 +1,44 @@
+00001000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 06/02/2024 09:30:48
+
+00000000                             1  *-----------------------------------------------------------
+00000000                             2  * Title      :part1
+00000000                             3  * Written by :stephen foley
+00000000                             4  * Date       :6/2/24
+00000000                             5  * Description:
+00000000                             6  *-----------------------------------------------------------
+00001000                             7      ORG    $1000
+00001000                             8  START:                  ; first instruction of program
+00001000                             9  
+00001000                            10  * Put program code here
+00001000                            11      ;Move Health to Memory Location $3000
+00001000  11FC 0064 3000            12      MOVE.B #100, $3000
+00001006                            13      
+00001006                            14      
+00001006                            15      ; Load Memeory Address $300 into
+00001006                            16      ; Address register A1
+00001006  43F8 3000                 17      LEA     $3000, A1
+0000100A                            18      
+0000100A                            19      ;Hit by NPC (Non playable character)
+0000100A  0411 0014                 20      SUB.B #20, (A1)
+0000100E                            21      
+0000100E                            22      ; Pickup health found
+0000100E  0611 000A                 23      ADD.B #10,(A1)
+00001012                            24      
+00001012                            25      
+00001012                            26  
+00001012  FFFF FFFF                 27      SIMHALT             ; halt simulator
+00001016                            28  
+00001016                            29  * Put variables and constants here
+00001016                            30  
+00001016                            31      END    START        ; last line of source
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+START               1000

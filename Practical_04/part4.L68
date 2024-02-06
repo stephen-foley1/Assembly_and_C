@@ -1,0 +1,95 @@
+00001000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 06/02/2024 09:55:44
+
+00000000                             1  *-----------------------------------------------------------
+00000000                             2  * Title      :part 4
+00000000                             3  * Written by :Stephen Foley
+00000000                             4  * Date       :6/2/24
+00000000                             5  * Description:
+00000000                             6  *-----------------------------------------------------------
+00001000                             7      ORG    $1000
+00001000                             8  START:                  ; first instruction of program
+00001000                             9  
+00001000                            10  * Put program code here
+00001000                            11        ;Move Health to Memory Location $3000
+00001000  11FC 0064 3000            12      MOVE.B #100, $3000
+00001006                            13      
+00001006                            14      ;move player damage into mem location 4000
+00001006  11FC 000A 4000            15      MOVE.B #10, $4000
+0000100C                            16      
+0000100C                            17      ;Move Health to Memory Location $3000
+0000100C  11FC 0014 5000            18      MOVE.B #20, $5000
+00001012                            19      
+00001012                            20      ; load Memeory Address $3000 into
+00001012                            21      ; Address register A1
+00001012  43F8 3000                 22      LEA     $3000, A1
+00001016                            23      
+00001016                            24      ;load mem address 4000 into A2
+00001016  45F8 4000                 25      LEA     $4000,A2
+0000101A                            26      
+0000101A                            27      ;load mem address 5000 into A2
+0000101A  47F8 5000                 28      LEA     $5000,A3
+0000101E                            29      
+0000101E                            30      ;location of player
+0000101E  143C 0012                 31      MOVE.B #$12 ,D2
+00001022                            32      
+00001022                            33      ;location of boss
+00001022  163C 0022                 34      MOVE.B #$22 , D3
+00001026                            35      
+00001026                            36      ;Branch Taking damage
+00001026  6100 0016                 37      BSR TAKING_DAMAGE
+0000102A                            38      
+0000102A                            39      BACK_IN_THE_GAME:
+0000102A                            40      ;lets help this player out
+0000102A  6100 0020                 41      BSR HEALTH_PICKUP
+0000102E  C43C 0030                 42      AND.B #$30 ,D2
+00001032  6000 0002                 43      BRA DAMAGE_BOOST
+00001036                            44      
+00001036                            45      DAMAGE_BOOST:
+00001036                            46      ;gains damage boost
+00001036  0612 0014                 47      ADD.B #20, (A2)
+0000103A  6000 0008                 48      BRA HITTING_BOSS
+0000103E                            49      
+0000103E                            50      TAKING_DAMAGE:
+0000103E                            51      ;hit by npc
+0000103E  0411 0014                 52      SUB.B #20,(A1)
+00001042  60E6                      53      BRA BACK_IN_THE_GAME
+00001044                            54      
+00001044                            55      HITTING_BOSS:
+00001044                            56      ;kill the boss
+00001044  0413 0014                 57      SUB.B #20 ,(A3)
+00001048  6000 0008                 58      BRA GAME_END
+0000104C                            59      
+0000104C                            60      
+0000104C                            61      HEALTH_PICKUP:
+0000104C                            62      ; Pickup helath found
+0000104C  0611 000A                 63      ADD.B #10, (A1)
+00001050  4E75                      64      RTS ;returns to where health pickup was called and implements the next line of code
+00001052                            65      
+00001052                            66      GAME_END:
+00001052                            67      ;Game Over 
+00001052  12BC 0000                 68      MOVE.B #$00,(A1)
+00001056  14BC 0000                 69      MOVE.B #$00,(A2)
+0000105A                            70  
+0000105A                            71  
+0000105A  FFFF FFFF                 72      SIMHALT             ; halt simulator
+0000105E                            73  
+0000105E                            74  * Put variables and constants here
+0000105E                            75  
+0000105E                            76      END    START        ; last line of source
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+BACK_IN_THE_GAME    102A
+DAMAGE_BOOST        1036
+GAME_END            1052
+HEALTH_PICKUP       104C
+HITTING_BOSS        1044
+START               1000
+TAKING_DAMAGE       103E

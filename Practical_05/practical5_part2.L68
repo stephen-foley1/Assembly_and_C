@@ -1,0 +1,70 @@
+00001000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 13/02/2024 16:16:28
+
+00000000                             1  *-----------------------------------------------------------
+00000000                             2  * Title      :Part 2 
+00000000                             3  * Written by :Stephen Foley
+00000000                             4  * Date       :14/02/24
+00000000                             5  * Description:
+00000000                             6  *-----------------------------------------------------------
+00001000                             7      ORG     $1000 
+00001000                             8  
+00001000                             9   
+00001000                            10  
+00001000                            11  START: 
+00001000                            12  
+00001000  43F9 0000102A             13      LEA PLAYER_POSITION, A1 
+00001006  45F9 0000102C             14      LEA ENEMY_POSITION, A2 
+0000100C  123C 0032                 15      MOVE.B #50, D1 
+00001010  143C 0000                 16      MOVE.B #0, D2   
+00001014                            17      
+00001014                            18   
+00001014                            19  
+00001014                            20  COLLISION_CHECK: 
+00001014                            21  
+00001014  B242                      22      CMP D2, D1  
+00001016  6D00 0006                 23      BLT NEXT_MOVE  
+0000101A  6700 0006                 24      BEQ COLLISION 
+0000101E                            25  
+0000101E                            26   
+0000101E                            27  
+0000101E                            28  NEXT_MOVE: 
+0000101E                            29  
+0000101E  5202                      30      ADD.B #1, D2 
+00001020  60F2                      31      BRA COLLISION_CHECK 
+00001022                            32  
+00001022                            33   
+00001022                            34  
+00001022                            35  COLLISION: 
+00001022                            36  
+00001022  6000 0002                 37      BRA GAME_OVER 
+00001026                            38  
+00001026                            39   
+00001026                            40  
+00001026                            41  GAME_OVER: 
+00001026                            42  
+00001026  FFFF FFFF                 43      SIMHALT 
+0000102A                            44  
+0000102A                            45   
+0000102A                            46  
+0000102A= 0A 0F                     47  PLAYER_POSITION: DC.B 10, 15 
+0000102C                            48  
+0000102C= 32 37                     49  ENEMY_POSITION: DC.B 50, 55 
+0000102E                            50  
+0000102E                            51      END     START 
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+COLLISION           1022
+COLLISION_CHECK     1014
+ENEMY_POSITION      102C
+GAME_OVER           1026
+NEXT_MOVE           101E
+PLAYER_POSITION     102A
+START               1000

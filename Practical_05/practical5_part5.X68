@@ -59,7 +59,7 @@ UPDATE:
     BLE		GAME_OVER		    ;Game Over 
     ADD.L 	#1, (A2)		   	;Change X position of player 
     BSR		COLLISION		    ;Check for collisions with enemies 
-    BSR     POWER_UPS
+    BSR     POWER_UP
     RTS     
 
  
@@ -68,6 +68,13 @@ DRAW:
     MOVE.B	#13, D0 
     TRAP		#15 
     RTS 
+    
+POWER_UP:
+    MOVE.B #1, D6
+    LEA     MSG_POWERUP, A1
+    LEA     POWER_UPS, A3
+    BNE		ITERATE	
+    BRA     GAME_LOOP
     
 COLLISION: 
 
@@ -100,13 +107,7 @@ REDUCE_HEALTH:
     BSR 	DRAW 
     
     BRA 		GAME_LOOP 
-POWER_UPS:
 
-    LEA     MSG_POWERUP, A1
-    BSR     DRAW  
-    
-    ADD.B   #20,    PLAYER_HEALTH
-    BRA         GAME_LOOP
        
 GAME_OVER: 
     LEA		MSG_GAMEOVER, A1 
@@ -135,7 +136,7 @@ MSG_COLLISION       DC.B    'Collision',0
 MSG_GAMEOVER        DC.B    'Game Over',0
 MSG_DAMAGE          DC.B    'Taking Damage',0
 MSG_POWERUP         DC.B    'You got a Power Up',0
-POWER_UPS           DC.L 10, 55, 220, 0 ; Terminate Array with a 0
+POWER_UPS           DC.L    10, 55, 220, 240,280,300,320,340,360,380,400, 0 ; Terminate Array with a 0
 CRLF		        DC.B 	$0D, $0A, 0 
 ENEMY_POSITIONS	    DC.L	20, 30, 40, 50, 60, 70, 80, 90, 200, 300, 500, 0	;Terminate the array with 0 
 

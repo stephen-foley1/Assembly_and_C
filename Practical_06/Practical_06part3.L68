@@ -1,0 +1,39 @@
+00001000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 27/02/2024 09:44:01
+
+00000000                             1  *-----------------------------------------------------------
+00000000                             2  * Title      :part 3
+00000000                             3  * Written by :Stephen Foley
+00000000                             4  * Date       :27/02/24
+00000000                             5  * Description:
+00000000                             6  *-----------------------------------------------------------
+00001000                             7      ORG    $1000
+00001000                             8  START:                  ; first instruction of program
+00001000                             9  
+00001000  4FF8 4000                 10      LEA $4000, A7
+00001004                            11      
+00001004  1F3C 0001                 12      MOVE.B  #1, -(A7)
+00001008  1F3C 0002                 13      MOVE.B  #2, -(A7)
+0000100C  1F3C 0003                 14      MOVE.B  #3, -(A7)
+00001010  1F3C 0004                 15      MOVE.B  #4, -(A7)
+00001014                            16      
+00001014  121F                      17      MOVE.B  (A7)+, D1
+00001016  121F                      18      MOVE.B  (A7)+, D1
+00001018  121F                      19      MOVE.B  (A7)+, D1
+0000101A  121F                      20      MOVE.B  (A7)+, D1
+0000101C                            21  
+0000101C  FFFF FFFF                 22      SIMHALT             ; halt simulator
+00001020                            23  
+00001020                            24  
+00001020                            25  
+00001020                            26      END    START        ; last line of source
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+START               1000

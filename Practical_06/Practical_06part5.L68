@@ -1,0 +1,55 @@
+00001000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 27/02/2024 09:54:45
+
+00000000                             1  *-----------------------------------------------------------
+00000000                             2  * Title      :
+00000000                             3  * Written by :
+00000000                             4  * Date       :
+00000000                             5  * Description:
+00000000                             6  *-----------------------------------------------------------
+00001000                             7      ORG    $1000
+00001000                             8  START:                  ; first instruction of program
+00001000                             9  
+00001000  2F3C 00001042             10      MOVE.L  #HEALTH,    -(SP)
+00001006  4EB9 00001014             11      JSR     GAME_LOOP
+0000100C  6100 0010                 12      BSR     HEADS_UP_DISPLAY
+00001010  6000 0026                 13      BRA     END
+00001014                            14      
+00001014                            15  GAME_LOOP:
+00001014  226F 0004                 16      MOVEA.L 4(SP),   A1
+00001018  0411 000A                 17      SUB.B   #10,    (A1)
+0000101C  4E75                      18      RTS
+0000101E                            19      
+0000101E                            20  HEADS_UP_DISPLAY:
+0000101E  43F9 00001043             21      LEA     MESSAGE,A1
+00001024  103C 000E                 22      MOVE.B  #14,    D0
+00001028  4E4F                      23      TRAP    #15
+0000102A  1239 00001042             24      MOVE.B  HEALTH, D1
+00001030  103C 0003                 25      MOVE.B  #3,     D0
+00001034  4E4F                      26      TRAP    #15
+00001036  4E75                      27      RTS
+00001038                            28  END:
+00001038  103C 0009                 29     MOVE.B  #9, D0      ; Trap code 9: Terminate program
+0000103C  4E40                      30     TRAP    #0          ; Call trap handler
+0000103E                            31  
+0000103E  FFFF FFFF                 32      SIMHALT             ; halt simulator
+00001042                            33  
+00001042= 64                        34  HEALTH:     DC.B    100
+00001043= 48 45 41 4C 54 48 ...     35  MESSAGE:    DC.B    'HEALTH: ',0
+0000104C                            36  
+0000104C                            37      END    START        ; last line of source
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+END                 1038
+GAME_LOOP           1014
+HEADS_UP_DISPLAY    101E
+HEALTH              1042
+MESSAGE             1043
+START               1000

@@ -1,0 +1,40 @@
+00001000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 27/02/2024 09:48:07
+
+00000000                             1  *-----------------------------------------------------------
+00000000                             2  * Title      :
+00000000                             3  * Written by :
+00000000                             4  * Date       :
+00000000                             5  * Description:
+00000000                             6  *-----------------------------------------------------------
+00001000                             7      ORG    $1000
+00001000                             8  START:                  ; first instruction of program
+00001000                             9  
+00001000  4FF8 4000                 10      LEA $4000, SP       ;Initializes the stack pointer SP with the address $4000.
+00001004                            11      
+00001004  1F3C 0001                 12      MOVE.B  #1, -(SP)   ;Pushes immediate value 1 to stack
+00001008  1F3C 0002                 13      MOVE.B  #2, -(SP)   ;Pushes immediate value 2 to stack
+0000100C  1F3C 0003                 14      MOVE.B  #3, -(SP)   ;Pushes immediate value 3 to stack
+00001010  1F3C 0004                 15      MOVE.B  #4, -(SP)   ;Pushes immediate value 4 to stack
+00001014                            16      
+00001014  121F                      17      MOVE.B  (SP)+, D1   ;Pops the top byte from the stack into register D1 and increments the stack pointer.
+00001016  121F                      18      MOVE.B  (SP)+, D1   ;Pops the next byte from the stack into register D1 and increments the stack pointer.
+00001018  121F                      19      MOVE.B  (SP)+, D1   ;Pops the next byte from the stack into register D1 and increments the stack pointer.
+0000101A  121F                      20      MOVE.B  (SP)+, D1   ;Pops the last byte from the stack into register D1 and increments the stack pointer.
+0000101C                            21      
+0000101C                            22  
+0000101C  FFFF FFFF                 23      SIMHALT             ; halt simulator
+00001020                            24  
+00001020                            25  * Put variables and constants here
+00001020                            26  
+00001020                            27      END    START        ; last line of source
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+START               1000

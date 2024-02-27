@@ -1,0 +1,43 @@
+00001000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 27/02/2024 09:31:02
+
+00000000                             1  *-----------------------------------------------------------
+00000000                             2  * Title      :Part 1
+00000000                             3  * Written by :Stephen Foley
+00000000                             4  * Date       :27/02/24
+00000000                             5  * Description:
+00000000                             6  *-----------------------------------------------------------
+00001000                             7      ORG    $1000
+00001000                             8  START:                  ; first instruction of program
+00001000                             9  
+00001000                            10      ;move Trap Task to D0
+00001000  103C 0002                 11      MOVE.B  #2, D0
+00001004                            12      ;Interupt and trap task
+00001004  4E4F                      13      TRAP    #15
+00001006                            14      
+00001006  43F9 00001016             15      LEA     MESSAGE, A1
+0000100C  103C 000D                 16      MOVE.B  #13, D0
+00001010  4E4F                      17      TRAP    #15
+00001012                            18      
+00001012                            19  END_PROG:
+00001012                            20  
+00001012                            21  
+00001012                            22      
+00001012                            23  
+00001012  FFFF FFFF                 24      SIMHALT             ; halt simulator
+00001016                            25  
+00001016= 54 72 61 70 20 54 ...     26  MESSAGE: DC.B   'Trap Task Test', 0
+00001025                            27  
+00001025                            28      END    START        ; last line of source
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+END_PROG            1012
+MESSAGE             1016
+START               1000

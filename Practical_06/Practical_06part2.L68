@@ -1,0 +1,43 @@
+00005000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 27/02/2024 09:41:40
+
+00000000                             1  *-----------------------------------------------------------
+00000000                             2  * Title      :Part 2
+00000000                             3  * Written by :Stephen foley
+00000000                             4  * Date       :27/02/24
+00000000                             5  * Description:
+00000000                             6  *-----------------------------------------------------------
+00005000                             7      ORG    $5000
+00005000                             8  START:                  ; first instruction of program
+00005000                             9  
+00005000                            10  
+00005000                            11  
+00005000                            12  
+00005000                            13  
+00005000  =00001000                 14  A1      EQU     $1000           ; Example address for string input
+00005000  =00002000                 15  D1      EQU     $2000           ; Example address for data input
+00005000                            16  
+00005000  103C 0008                 17  TRAP8   MOVE.B  #8, D0          ; Return time in hundredths of a second
+00005004  4E40                      18          TRAP    #0              ; Use trap code 0
+00005006                            19  
+00005006                            20  END
+00005006                            21  
+00005006  FFFF FFFF                 22      SIMHALT             ; halt simulator
+0000500A                            23  
+0000500A                            24  
+0000500A                            25  
+0000500A                            26      END    START        ; last line of source
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+A1                  1000
+D1                  2000
+END                 5006
+START               5000
+TRAP8               5000

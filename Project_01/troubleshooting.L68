@@ -1,0 +1,60 @@
+00001000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 29/02/2024 18:53:16
+
+00000000                             1  * Section: Game Stats
+00000000  =00000005                  2  COLLISION_LIMIT EQU 5 ; Define the collision limit
+00000000                             3  
+00000000                             4  * Section: Game
+00000000                             5  CHECK_COLLISIONS:
+00000000                             6      ; Add a check for the collision limit
+00000000  0CB8 00000000 0005         7      CMP.L   #0, COLLISION_LIMIT     ; Check if the collision limit is reached
+00000008  6700 0006                  8      BEQ     COLLISION_LIMIT_REACHED ; If collision limit reached, skip collision check
+0000000C                             9      
+0000000C  4281                      10      CLR.L   D1                      ; Clear D1
+0000000E  4282                      11      CLR.L   D2                      ; Clear D2
+00000010                            12  
+00000010                            13      ; Collision detection logic goes here
+00000010                            14  
+00000010                            15  COLLISION_LIMIT_REACHED:
+00000010  4E75                      16      RTS
+00000012                            17  
+00000012                            18  DRAW_PLYR_DATA:
+00000012                            19    ; Add display for collision limit message
+00000012                            20     ; MOVE.B  #TC_CURSR_P,D0          ; Set Cursor Position
+00000012  323C 0203                 21      MOVE.W  #$0203,     D1          ; Col 02, Row 03 (adjust as needed)
+00000016  4E4F                      22      TRAP    #15                     ; Trap (Perform action)
+00000018  43F9 00000036             23      LEA     COLLISION_LIMIT_MSG, A1  ; Load address of collision limit message
+0000001E  303C 0000                 24      MOVE    #0,         D0          ; Display null-terminated string
+00000022  4E4F                      25      TRAP    #15                     ; Trap (Perform action)
+00000024                            26  
+00000024                            27      ; Display the actual collision limit value
+00000024                            28     ; MOVE.B  #TC_CURSR_P,D0          ; Set Cursor Position
+00000024  323C 1203                 29      MOVE.W  #$1203,     D1          ; Col 12, Row 03 (adjust as needed)
+00000028  4E4F                      30      TRAP    #15                     ; Trap (Perform action)
+0000002A  103C 0003                 31      MOVE.B  #03,        D0          ; Display number at D1.L
+0000002E  2238 0005                 32      MOVE.L  COLLISION_LIMIT, D1     ; Move collision limit value to D1.L
+00000032  4E4F                      33      TRAP    #15                     ; Trap (Perform action)
+00000034  4E75                      34      RTS
+00000036                            35  
+00000036                            36  TS
+00000036                            37  
+00000036                            38  * Section: Messages
+00000036= 43 6F 6C 6C 69 73 ...     39  COLLISION_LIMIT_MSG     DC.B    'Collision Limit: ', 0 ; Collision Limit Message
+00000048                            40  
+Line 41 ERROR: Undefined symbol
+00000048                            41      end start
+
+1 error detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+CHECK_COLLISIONS    0
+COLLISION_LIMIT     5
+COLLISION_LIMIT_MSG  36
+COLLISION_LIMIT_REACHED  10
+DRAW_PLYR_DATA      12
+TS                  36

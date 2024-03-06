@@ -1,10 +1,13 @@
 *-----------------------------------------------------------
-* Title      : Endless Runner 
+* Title      : Runner 
 * Written by : Stephen Foley
 * Date       : 19/02/24
-* Description: Endless Runner Project based off the starter kit provided by philip bourke.
+* Description: Runner Project based off the starter kit provided by philip bourke.
 *              I Changed the Colour of the player. I changed the shape and size of the rectangles.
-*              I Slowed the game down. I changed the sounds.  
+*              I Slowed the game down. I changed the sounds.I added a second enemy and called it enemny2. 
+*              I Changed the text and moved it's position. I updated the collision
+*              Checker to detect enemy2. Changed the Max velocity. 
+*              I also changed the game so that it ends when a collision is detected.
 *-----------------------------------------------------------
     ORG    $1000
 START:                  ; first instruction of program
@@ -252,7 +255,7 @@ UPDATE:
 * Description   : Move Enemy Right to Left
 *-----------------------------------------------------------
 MOVE_ENEMY:
-    SUB.L   #02,        ENEMY_X     ; Move enemy by X Value
+    SUB.L   #2,        ENEMY_X     ; Move enemy by X Value
     CMP.L   #0, ENEMY_X             ; Check if enemy moved off-screen
     BGT     NO_RESET_ENEMY          ; If not, skip reset
     BSR     RESET_ENEMY_POSITION    ; Reset enemy position
@@ -284,7 +287,7 @@ RESET_ENEMY_POSITION:
 RESET_ENEMY2_POSITION:
     CLR.L   D1                      ; Clear contents of D1 (XOR is faster)
     MOVE.W  SCREEN_W,   D1          ; Place Screen width in D1
-    MOVE.W  SCREEN_H    D2
+    MOVE.W  SCREEN_H,    D2
     MOVE.L  D1,         ENEMY_X2    ; Reset enemy X Position
     RTS
 END_RESET_ENEMY:
@@ -560,12 +563,11 @@ DRAW_ENEMY2:
     MOVE.L  ENEMY_Y2,    D2          ; Y
   
     MOVE.L  ENEMY_X2,    D3
-    ADD.L   #ENMY_W_INIT, D3        ; Width
-    ADD.L   #ENMY_W_INIT, D3
-  
+    ADD.L   #ENMY2_W_INIT*4, D3        ; Width
+    ADD.L   #30,D1
+    SUB.L   #10,D2
     MOVE.L  ENEMY_Y2,    D4 
-    ADD.L   #ENMY_H_INIT/3, D4        ; Height
-    MULS.W  D4, D2 
+    ADD.L   #ENMY2_H_INIT/3, D4        ; Heigh 
 
     ; Draw WHITE enemy    
     MOVE.B  #87,        D0          ; Draw Enemy
@@ -576,15 +578,16 @@ DRAW_ENEMY2:
     MOVE.B  #80,        D0          ; Task for Background Color
     TRAP    #15                     ; Trap (Perform action)
 
-    ; Set X, Y, Width and Height for red enemy
+    ; Set X, Y, Width and Height for GREEN enemy
     MOVE.L  ENEMY_X2,    D1          ; X
     MOVE.L  ENEMY_Y2,    D2          ; Y
-    ADD.L    #5,D1 
     MOVE.L  ENEMY_X2,    D3
-    ADD.L   #ENMY_W_INIT, D3        ; Width
-    ADD.L   #ENMY_W_INIT/2, D3
-    MOVE.L  ENEMY_Y2,    D4          ; Adjust Y coordinate for red enemy
-    ADD.L   #ENMY_H_INIT, D4        ; Height
+    ADD.L   #ENMY2_W_INIT*4, D3        ; Width
+    ADD.L   #30,D1 
+ 
+    MOVE.L  ENEMY_Y2,    D4          ; Adjust Y coordinate for GREEN enemy
+ 
+    ADD.L   #ENMY2_H_INIT, D4        ; Height
 
     ; Draw GREEN enemy    
     MOVE.B  #87,        D0          ; Draw Enemy
@@ -694,6 +697,7 @@ END_GAME:
 *-----------------------------------------------------------
 EXIT:
     ; Show if Exiting is Running
+    LEA     EXIT_MSG,   A1          ; Exit
     MOVE.B  #TC_CURSR_P,D0          ; Set Cursor Position
     MOVE.W  #$4004,     D1          ; Col 40, Row 1
     TRAP    #15                     ; Trap (Perform action)
@@ -768,6 +772,8 @@ ENEMY_X2        DS.L    01  ; Reserve Space for Enemy 2 X Position
 ENEMY_Y2        DS.L    01  ; Reserve Space for Enemy 2 Y Position
 
     END    START        ; last line of source
+
+
 
 
 

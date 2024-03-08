@@ -808,7 +808,7 @@ EXIT:
 * self documenting
 *-----------------------------------------------------------
 SCORE_MSG       DC.B    'Score : ', 0       ; Score Message
-WELCOME_MSG:    DC.B    'Stephen Foleys Endless runner', 0    ; New game title message (with newline)
+WELCOME_MSG:    DC.B    'Stephen Foleys Runner', 0    ; New game title message (with newline)
 WELCOME_MSG2:   DC.B    'How far can you get?', 0    ; How far can you get? message (with newline)
 WELCOME_MSG3:   DC.B    'The current high score is 999999', 0    ; High score message (with newline)
 WELCOME_MSG4:   DC.B    '       GOOD LUCK !         '    , 0    ; Good luck message (with additional leading spaces)
@@ -875,6 +875,7 @@ RUN_WAV         DC.B    'lasershoot.wav',0         ; Run Sound
 OPPS_WAV        DC.B    'hitHurt.wav',0        ; Collision Opps
 
     END    START        ; last line of source
+
 
 
 

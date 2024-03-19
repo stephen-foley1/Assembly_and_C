@@ -1,0 +1,17 @@
+// Binary Dir
+bin/
+
+// Object Files
+*.o
+
+// Compiled files
+*.out
+
+// Assemble files during compilation
+*.s
+
+// Binary Files
+*.bin
+
+// Binary Files
+*.exe

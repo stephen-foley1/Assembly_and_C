@@ -1,0 +1,31 @@
+     1                                  ; Filename starter.asm
+     2                                  
+     3                                  ; GLOBALS
+     4                                  global _start ;Declared for linker this is declaring _start (entry point)
+     5                                  
+     6                                  ; TEXT SECTION
+     7                                  section	.text
+     8                                  _start:	                                 ;linker entry point
+     9 00000000 BA10000000                 mov	rdx,  msg_length                 ;message length see length equ 64 Bit Register
+    10                                  
+    11 00000005 48BE-                      mov	rsi,  message                    ;message 64 Bit Register
+    11 00000007 [0000000000000000] 
+    12                                  
+    13 0000000F BF01000000                 mov	rdi,  0x1                        ;file descriptor (stdout) 64 Bit Register
+    14                                  
+    15 00000014 B801000000                 mov	rax,  0x1                        ;system call number (sys_write) 64 Bit Register
+    16                                  
+    17 00000019 0F05                       syscall                                ;call kernel 64 bit System
+    18                                  	
+    19 0000001B B83C000000                 mov	rax,  0x3c                       ;system call number (sys_exit) 64 Bit Register
+    20                                  
+    21 00000020 BF00000000                 mov   rdi,  0x0                        ;return status 64 Bit Register
+    22                                  
+    23 00000025 0F05                       syscall                                ;call kernel 64 bit System
+    24                                  
+    25                                  ; DATA SECTION
+    26                                  section	.data
+    27                                  
+    28 00000000 417373656D626C7920-     message db 'Assembly and C ', 0xA    ;string to be printed
+    28 00000009 616E642043200A     
+    29                                  msg_length equ $-message                  ;length of the string

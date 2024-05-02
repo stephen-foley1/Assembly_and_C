@@ -1,21 +1,29 @@
-;AS=nasm #Assembly compiler
-ASFLAGS=-f elf64 -g -l starter.lst #Assembly flags 64 Bit (create linux elf)
-LD=ld #Lmainker
-LDFLAGS= #Linker flags
-SOURCES=$(wildcard ./*.asm) #Sources
-OBJECTS=$(SOURCES:.asm=.o) #Object files
+# Assembly compiler
+AS=nasm
+# Assembly flags for 64-bit Linux ELF
+ASFLAGS=-f elf64 -g -F dwarf
+# Linker
+LD=ld
+# Linker flags (none specified)
+LDFLAGS=
+# Source files (all .asm files in the current directory)
+SOURCES=$(wildcard ./*.asm)
+# Object files (generated from source files)
+OBJECTS=$(SOURCES:.asm=.o)
+# Executable name
 EXECUTABLE=Project2
-#Check version
-all: $(SOURCES) $(EXECUTABLE)
 
-#Create executable
-$(EXECUTABLE): $(OBJECTS) 
+# Default target: build the executable
+all: $(EXECUTABLE)
+
+# Rule to build the executable from object files
+$(EXECUTABLE): $(OBJECTS)
 	$(LD) $(LDFLAGS) $(OBJECTS) -o $@
 
-#Compile assembly program
-$(OBJECTS): $(SOURCES)
-	$(AS) $(ASFLAGS) $(SOURCES)
- 
-#Clean folder
+# Rule to compile each assembly source file into an object file
+%.o: %.asm
+	$(AS) $(ASFLAGS) $< -o $@
+
+# Clean up generated files
 clean:
-	rm -rf *o *.lst $(EXECUTABLE)
+	rm -rf *.o *.lst $(EXECUTABLE)
